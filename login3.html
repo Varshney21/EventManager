@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			#Cal{
+				width: 100%;
+				height: 100%;
+			}
+			#T1{
+				border-collapse: collapse;
+				margin: 10px auto;
+				#padding-top: 50px;
+			}
+			#T0{
+				width: 100%;
+				border-collapse: collapse;
+			}
+			#T1 td{
+				border: 2px solid black;
+				padding: 5px;
+				width: 80px;
+				height: 50px;
+				text-align: center;
+				#font-size: 10px;
+				vertical-align: top;
+				#padding-left: 20px;
+			}
+			#T2{
+				width: 100%;
+				border-collapse: collapse;
+			}
+			#T2 td{
+				#border: 2px solid black;
+			}
+			.W{
+				height: 20px;
+				text-align: center;
+				background-color: lightgreen;
+			}
+			.star{
+				font-weight: bold;
+				font-size: 25px;
+				color: blue;
+				display: none;
+			}
+			.H1{
+				background-color: red;
+				background-position: center;			
+				height: 50px;
+				text-align: left;
+				#font-size: 20px;	
+				padding-left: 50px;
+				padding-right: 50px;	
+				font-size: 30px;	
+				font-family: Bradley Hand ITC;
+			}	
+			#LO{
+				background-color: red;
+				text-align: center;
+			}
+			#L1{
+				padding-top: 15px;
+				background-color: white;
+				text-align: center;
+			}
+			.info0{
+				#display: none;
+			}
+			.info2{
+				text-align: right;
+				padding-bottom: 2px;
+				padding-right: 130px;
+				background-color: white;
+				display: none;	
+				font-size: 30px;	
+				font-family: Bradley Hand ITC;
+				vertical-align: middle;
+			}
+			.info3{
+				text-align: center;
+				padding-bottom: 2px;
+				#padding-right: 130px;
+				background-color: white;
+				display: none;	
+				font-size: 30px;	
+				font-family: Bradley Hand ITC;
+				vertical-align: middle;
+			}
+			input[type=button]{
+				border-radius: 4px;
+				font-size: 20px;
+				font-family: Comic Sans MS;
+				background-color: #fff;
+				border: 2px solid blue;
+			}
+			input[type=text]{
+				width: 60%;
+				border: 2px solid lightblue;
+	    		border-radius: 4px;
+	    		padding: 10px;
+	    		font-size: 20px;
+	    		font-family: Comic Sans MS;
+	    		background-color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<table id="T0">
+			<tr>
+				<td class="H1">Hi.... Welcome To Event Manager</td>
+				<td id="LO"><input type="button" id="Logout" value="Logout"></input></td>		
+			</tr>
+		</table>
+			<div id="Cal">
+				<table id="T1">
+					<tr class="info0">
+						<td class="W">Sunday</td>
+						<td class="W">Monday</td>
+						<td class="W">Tuesday</td>
+						<td class="W">Wednesday</td>
+						<td class="W">Thursday</td>
+						<td class="W">Friday</td>
+						<td class="W">Saturday</td>
+					</tr>
+					<tr class="info0">
+						<td id="K00" onclick="myFunction(0,0)"><span id="D00"></span><br>
+						    <span id="d00" class="star">*</span></td>
+						<td id="K01" onclick="myFunction(0,1)"><span id="D01"></span><br>
+						    <span id="d01" class="star">*</span></td>
+						<td id="K02" onclick="myFunction(0,2)"><span id="D02"></span><br>
+						    <span id="d02" class="star">*</span></td>
+						<td id="K03" onclick="myFunction(0,3)"><span id="D03"></span><br>
+						    <span id="d03" class="star">*</span></td>
+						<td id="K04" onclick="myFunction(0,4)"><span id="D04"></span><br>
+						    <span id="d04" class="star">*</span></td>
+						<td id="K05" onclick="myFunction(0,5)"><span id="D05"></span><br>
+						    <span id="d05" class="star">*</span></td>
+						<td id="K06" onclick="myFunction(0,6)"><span id="D06"></span><br>
+						    <span id="d06" class="star">*</span></td>
+					</tr>
+					<tr class="info0">
+						<td id="K10" onclick="myFunction(1,0)"><span id="D10"></span><br>
+						    <span id="d10" class="star">*</span></td>
+						<td id="K11" onclick="myFunction(1,1)"><span id="D11"></span><br>
+						    <span id="d11" class="star">*</span></td>
+						<td id="K12" onclick="myFunction(1,2)"><span id="D12"></span><br>
+						    <span id="d12" class="star">*</span></td>
+						<td id="K13" onclick="myFunction(1,3)"><span id="D13"></span><br>
+						    <span id="d13" class="star">*</span></td>
+						<td id="K14" onclick="myFunction(1,4)"><span id="D14"></span><br>
+						    <span id="d14" class="star">*</span></td>
+						<td id="K15" onclick="myFunction(1,5)"><span id="D15"></span><br>
+						    <span id="d15" class="star">*</span></td>
+						<td id="K16" onclick="myFunction(1,6)"><span id="D16"></span><br>
+						    <span id="d16" class="star">*</span></td>
+					</tr>
+					<tr class="info0">
+						<td id="K20" onclick="myFunction(2,0)"><span id="D20"></span><br>
+						    <span id="d20" class="star">*</span></td>
+						<td id="K21" onclick="myFunction(2,1)"><span id="D21"></span><br>
+						    <span id="d21" class="star">*</span></td>
+						<td id="K22" onclick="myFunction(2,2)"><span id="D22"></span><br>
+						    <span id="d22" class="star">*</span></td>
+						<td id="K23" onclick="myFunction(2,3)"><span id="D23"></span><br>
+						    <span id="d23" class="star">*</span></td>
+						<td id="K24" onclick="myFunction(2,4)"><span id="D24"></span><br>
+						    <span id="d24" class="star">*</span></td>
+						<td id="K25" onclick="myFunction(2,5)"><span id="D25"></span><br>
+						    <span id="d25" class="star">*</span></td>
+						<td id="K26" onclick="myFunction(2,6)"><span id="D26"></span><br>
+						    <span id="d26" class="star">*</span></td>
+					</tr>
+					<tr class="info0">
+						<td id="K30" onclick="myFunction(3,0)"><span id="D30"></span><br>
+						    <span id="d30" class="star">*</span></td>
+						<td id="K31" onclick="myFunction(3,1)"><span id="D31"></span><br>
+						    <span id="d31" class="star">*</span></td>
+						<td id="K32" onclick="myFunction(3,2)"><span id="D32"></span><br>
+						    <span id="d32" class="star">*</span></td>
+						<td id="K33" onclick="myFunction(3,3)"><span id="D33"></span><br>
+						    <span id="d33" class="star">*</span></td>
+						<td id="K34" onclick="myFunction(3,4)"><span id="D34"></span><br>
+						    <span id="d34" class="star">*</span></td>
+						<td id="K35" onclick="myFunction(3,5)"><span id="D35"></span><br>
+						    <span id="d35" class="star">*</span></td>
+						<td id="K36" onclick="myFunction(3,6)"><span id="D36"></span><br>
+						    <span id="d36" class="star">*</span></td>
+					</tr>
+					<tr class="info0">
+						<td id="K40" onclick="myFunction(4,0)"><span id="D40"></span><br>
+						    <span id="d40" class="star">*</span></td>
+						<td id="K41" onclick="myFunction(4,1)"><span id="D41"></span><br>
+						    <span id="d41" class="star">*</span></td>
+						<td id="K42" onclick="myFunction(4,2)"><span id="D42"></span><br>
+						    <span id="d42" class="star">*</span></td>
+						<td id="K43" onclick="myFunction(4,3)"><span id="D43"></span><br>
+						    <span id="d43" class="star">*</span></td>
+						<td id="K44" onclick="myFunction(4,4)"><span id="D44"></span><br>
+						    <span id="d44" class="star">*</span></td>
+						<td id="K45" onclick="myFunction(4,5)"><span id="D45"></span><br>
+						    <span id="d45" class="star">*</span></td>
+						<td id="K46" onclick="myFunction(4,6)"><span id="D46"></span><br>
+						    <span id="d46" class="star">*</span></td>
+					</tr>
+				</table>
+			</div>
+			<table id="T0">
+				<tr><td class="info3">Event Information<br></td></tr>
+				<tr><td class="info2">Event Name:
+							<input type="text" id="Event_Name" disabled/><br></td></tr>
+				<tr><td class="info2">Start Date(mm/dd/yyyy):
+							<input type="text" id="datepicker" disabled/><br></td></tr>	
+				<tr><td class="info2">Event Time:
+							<input type="text" id="time" disabled/><br></td></tr>
+				<tr><td class="info2">Event Description:
+							<input type="text" id="Event_Desc" disabled/><br></td></tr>
+				<tr><td class="info3">Venue Information<br></td></tr>
+				<tr><td class="info2">Expected Participants:
+							<input type="text" id="Exp_Parti" disabled/><br></td></tr>
+				<tr><td class="info2">Event Venue:
+							<input type="text" id="Event_Venue" disabled/><br></td></tr>
+				<tr><td class="info2">Class Room No.:
+							<input type="text" id="Event_RNo" disabled/><br></td></tr>
+				<tr><td id="L1" class="info3"><input type="button" id="back" value="BACK"></td></tr>
+			</table>
+
+			<table id="T2">
+				
+			</table>
+		<script>
+			var d = new Date();
+			var date = d.getDate();
+			var day = d.getDay();
+			var month = d.getMonth();
+			var year = d.getFullYear();
+			var M;
+			var n;
+			var pn;
+			var flag=0;
+			switch(month){
+				case 0:
+					n = 31;
+					pn = 31;
+					M = "January";
+					break;
+				case 1:
+					M = "February";
+					pn = 31;
+					if((year%4) == 0)
+						n=29;
+					else
+						n=28;
+					break;
+				case 2:
+					n = 31;
+					M = "March";
+					if((year%4) == 0)
+						pn=29;
+					else
+						pn=28;
+					break;
+				case 3:
+					n = 30;
+					pn = 31;
+					M = "April";
+					break;
+				case 4:
+					n = 31;
+					pn = 30;
+					M = "May";
+					break;
+				case 5:
+					n = 30;
+					pn = 31;
+					M = "June";
+					break;
+				case 6:
+					n = 31;
+					pn = 30;
+					M = "July";
+					break;
+				case 7:
+					n = 31;
+					pn = 31;
+					M = "August";
+					break;
+				case 8:
+					n = 30;
+					pn = 31;
+					M = "September";
+					break;
+				case 9:
+					n = 31;
+					pn = 30;
+					M = "October";
+					break;
+				case 10:
+					n = 30;
+					pn = 31;
+					M = "November";
+					break;
+				case 11:
+					n = 31;
+					pn = 30;
+					M = "December";
+					break;
+			}
+			var x = date-day;
+			var y = date-day;
+			y = Math.ceil(y/7);
+			x = x%7;
+			//console.log(x,day); 
+			document.getElementById("K"+y+day).style.backgroundColor = "lightblue";
+			x = pn - (7 - x);
+			for(var j=0;j<5;j++){
+				for(var i=0;i<7;i++){
+					document.getElementById("D"+j+i).innerHTML = x++;
+					if(flag==0){
+						document.getElementById("D"+j+i).style.color = "red";
+					}
+					if(x==(pn+1) && flag==0){
+						x=1;
+						flag=1;
+					}
+					if(x==n+1 && flag==1){
+						x=1;
+						flag=0;
+					}
+				}
+			}
+			var xhttp = new XMLHttpRequest();
+  			xhttp.onreadystatechange = function() {
+    			if (this.readyState == 4 && this.status == 200) {
+    				var data = JSON.parse(this.responseText);
+    				for(var i=0;i<data.length;i++){
+    					var msec = Date.parse(data[i].E_Date);
+    					var E_d = new Date(msec);
+    					var E_date = E_d.getDate();
+    					var E_day = E_d.getDay();
+    					var I = E_day;
+    					var J = Math.ceil((E_date-E_day)/7);
+    					document.getElementById("d"+J+I).style.display = "inline";
+    				}
+    			}
+  			};
+  			xhttp.open('POST', 'http://localhost:3000/EventCalender', true);					
+			xhttp.setRequestHeader("Content-Type", "application/json");
+			xhttp.send();
+
+			function myFunction(l , m) {
+			    var c_day = document.getElementById("D"+l+m).innerHTML;
+			    var c_month = month+1;
+			    var c_year = year;
+			    if(c_month/10<1)
+			    	c_month = "0"+c_month;
+			    if(c_day/10<1)
+			    	c_day = "0"+c_day;
+			    var c_date = c_month+"/"+c_day+"/"+c_year;
+			    //console.log(c_date);
+			    var E_Data = JSON.stringify({'date': c_date});
+			    
+				var xhttp1 = new XMLHttpRequest();
+				xhttp1.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						result = JSON.parse(this.responseText);
+
+    					var list = document.getElementById("T2");
+					    var n = list.childNodes.length;
+					    //console.log(n);
+					    for(var i=0;i<n;i++)
+					    list.removeChild(list.childNodes[0]);
+
+						for(var i=0;i<result.length;i++){
+							var E = result[i].Event_Name;
+	    					var table = document.getElementById("T2");
+	    					var tr=document.createElement('tr');  
+
+						    var td1 = document.createElement('td');
+						    var td2 = document.createElement('td');
+						    td1.style.color = "black";
+							td1.style.textAlign= "right";
+							td1.style.fontSize= "30px";	
+							td1.style.fontFamily= "Bradley Hand ITC";
+							td1.style.width="50%";
+
+						    var text1 = document.createTextNode(E);
+						    var input = document.createElement('input');
+						    input.type = "button";
+						    input.value = "View Details";
+						    input.addEventListener("click", myclick.bind(null, E));
+
+						    td1.appendChild(text1); 
+						    td2.appendChild(input);
+						    tr.appendChild(td1);
+						   	tr.appendChild(td2);
+
+						    table.appendChild(tr);
+						}
+					}
+				}
+				xhttp1.open('POST', 'http://localhost:3000/EventInfoDate', true);					
+				xhttp1.setRequestHeader("Content-Type", "application/json");
+				xhttp1.send(E_Data);
+			};
+			function myclick(l){
+				var xinfo0 = document.getElementsByClassName("info0");
+				for(var i=0;i<xinfo0.length;i++){
+					xinfo0[i].style.display = "none";
+				}
+				var list = document.getElementById("T2");
+			    var n = list.childNodes.length;
+			    //console.log(n);
+			    for(var i=0;i<n;i++)
+			    list.removeChild(list.childNodes[0]);
+
+				var xinfo2 = document.getElementsByClassName("info2");
+				for(var i=0;i<xinfo2.length;i++){
+					xinfo2[i].style.display = "table-cell";
+				}
+				var xinfo3 = document.getElementsByClassName("info3");
+				for(var i=0;i<xinfo3.length;i++){
+					xinfo3[i].style.display = "table-cell";
+				}
+
+			    var E_Name = JSON.stringify({'Event': l});
+				var xhttp1 = new XMLHttpRequest();
+				xhttp1.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						result = JSON.parse(this.responseText);
+						//console.log("click hua laa",l);
+						document.getElementById("Event_Name").value = result[0].Event_Name;
+						document.getElementById("datepicker").value = result[0].Event_Date;
+						document.getElementById("time").value = result[0].Event_Time;
+						document.getElementById("Event_Desc").value = result[0].Event_Desc;
+						document.getElementById("Exp_Parti").value = result[0].Exp_Parti;
+						document.getElementById("Event_Venue").value = result[0].Event_Venue;
+						document.getElementById("Event_RNo").value = result[0].Event_RNo;
+					}
+				}
+				xhttp1.open('POST', 'http://localhost:3000/EventInfo', true);					
+				xhttp1.setRequestHeader("Content-Type", "application/json");
+				xhttp1.send(E_Name);
+			};
+			document.getElementById("back").onclick = function(){
+				var xinfo2 = document.getElementsByClassName("info2");
+				for(var i=0;i<xinfo2.length;i++){
+					xinfo2[i].style.display = "none";
+				}
+				var xinfo3 = document.getElementsByClassName("info3");
+				for(var i=0;i<xinfo3.length;i++){
+					xinfo3[i].style.display = "none";
+				}
+				var xinfo0 = document.getElementsByClassName("info0");
+				for(var i=0;i<xinfo0.length;i++){
+					xinfo0[i].style.display = "table-row";
+				}
+			};
+			document.getElementById("Logout").onclick = function () {
+				var xhttp1 = new XMLHttpRequest();
+				xhttp1.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						result = JSON.parse(this.responseText);
+						console.log(result);
+						window.location = result.redirect;
+					}
+				}
+				xhttp1.open('POST', 'http://localhost:3000/logout', true);					
+				xhttp1.setRequestHeader("Content-Type", "application/json");
+				xhttp1.send();
+				//window.location = "/";
+			};
+		</script>
+	</body>
+</html>

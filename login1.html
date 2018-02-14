@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
+  	 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+    <!--link rel="stylesheet" href="/resources/demos/style.css" /-->
+    
+    <script>
+  	 	$(function() {
+    		$( "#datepicker" ).datepicker();		
+  		});  
+  	 </script>
+	<style>
+		table{
+			width:100%;	
+			border-collapse: collapse;	
+		}
+		tr{
+			border-collapse: collapse;		
+		}		
+		td{
+			#border:2px solid black;		
+		}
+		.H1{
+			background-color: red;
+			background-position: center;			
+			height: 50px;
+			text-align: left;
+			#font-size: 20px;	
+			padding-left: 50px;
+			padding-right: 50px;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+		}	
+		.steps{
+			background-color: red;
+			padding: 15px;
+			text-align: center;
+			border-bottom: 5px solid red;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+			width: 25%;
+		}
+		.step1{
+			text-align: center;
+			background-color: white;
+			height: 50px;
+			position: relative;	
+			display: table-cell;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+		}
+		.step2{
+			text-align: center;			
+			background-color: white;
+			height: 50px;
+			position: relative;	
+			display: none;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+		}
+		.step3{
+			text-align: center;
+			background-color: white;
+			height: 50px;
+			position: relative;	
+			display: none;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+		}
+		.step4{
+			text-align: center;
+			background-color: white;
+			height: 50px;
+			position: relative;	
+			display: none;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+		}
+		#s1{
+			border-bottom-color: black;		
+		}
+		.button{
+			background-color: yellowgreen;
+			padding: 25px;		
+		}
+		.info1{
+			text-align: right;
+			padding-bottom: 2px;
+			padding-right: 180px;
+			background-color: white;
+			display: table-cell;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+			vertical-align: middle;
+		}
+		.info2{
+			text-align: right;
+			padding-bottom: 2px;
+			padding-right: 180px;
+			background-color: white;
+			display: none;		
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+			margin: 10px;	
+		}
+		.info3{
+			text-align: right;
+			padding-bottom: 2px;
+			padding-right: 200px;
+			background-color: white;
+			display: none;
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;		
+		}
+		.info4{
+			text-align: right;
+			padding-bottom: 2px;
+			padding-right: 200px;
+			background-color: white;
+			display: none;
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;		
+		}
+		input[type=text]{
+			width: 60%;
+			border: 2px solid lightblue;
+    		border-radius: 4px;
+    		padding: 10px;
+    		font-size: 20px;
+    		font-family: Comic Sans MS;
+		}
+		select{
+			width: 20%;
+			border: 2px solid lightblue;
+    		border-radius: 4px;
+    		padding: 10px;
+    		font-size: 20px;
+    		font-family: Comic Sans MS;
+		}
+		input[type=email]{
+			width: 60%;
+			border: 2px solid lightblue;
+    		border-radius: 4px;
+    		padding: 10px;
+    		font-size: 20px;
+    		font-family: Comic Sans MS;
+		}
+		input[type=button]{
+			border-radius: 4px;
+			font-size: 20px;
+			font-family: Comic Sans MS;
+			background-color: #fff;
+			border: 2px solid blue;
+		}
+		input[type=submit]{
+			border-radius: 4px;
+			font-size: 20px;
+			font-family: Comic Sans MS;
+			background-color: #fff;
+			border: 2px solid blue;
+		}
+		textarea{
+			padding-right: 40px;
+			width: 87%;
+    		height: 150px;
+    		padding: 12px 20px;
+    		box-sizing: border-box;
+    		border: 2px solid lightblue;
+    		border-radius: 4px;
+    		background-color: #fff;
+    		font-family: Bradley Hand ITC;
+    		font-size: 20px;
+    		resize: none;
+		}
+		#ED{
+			###padding-right: 40px;
+			width: 100%;
+    		height: 150px;
+    		padding: 12px 20px;
+    		box-sizing: border-box;
+    		border: 2px solid lightblue;
+    		border-radius: 4px;
+    		background-color: #fff;
+    		font-family: Comic Sans MS;
+    		font-size: 20px;
+    		resize: none;		
+		}
+		#EDt{
+			text-align: left;
+			padding-left: 160px;		
+		}
+		#LO{
+			background-color: red;
+			text-align: center;
+		}
+		.infoTag1{
+			color: red;
+			display: none;
+			font-weight: bold;
+		}
+		.infoTag2{
+			color: red;
+			display: none;
+			font-weight: bold;
+		}
+		.infoTag3{
+			color: red;
+			display: none;
+			font-weight: bold;
+		}
+		.infoTag4{
+			color: red;
+			display: none;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<!--h2><%= myvar %></h2-->
+	<table>
+		<tr>
+			<td class="H1" colspan="3">Hi....<%= myvar %> Welcome To Event Manager</td>
+			<td id="LO"><input type="button" id="Logout" value="Logout"></input></td>		
+		</tr>	
+		<tr>
+			<td class="steps" id="s1">Step1.</td>
+			<td class="steps" id="s2">Step2.</td>
+			<td class="steps" id="s3">Step3.</td>
+			<td class="steps" id="s4">Step4.</td>		
+		</tr>
+		<tr>
+			<td class="step1" colspan="4" id="S1">Form(Step1):Event Details</td>
+			<td class="step2" colspan="4" id="S2">Form(Step2):Venue Details</td>
+			<td class="step3" colspan="4" id="S3">Form(Step3):Student Co-ordinator Details</td>
+			<td class="step4" colspan="4" id="S4">Form(Step4):Faculty Co-ordinator Details</td>		
+		</tr>
+				<tr><td class="info1" colspan="4">Event Name<span class="infoTag1">*</span>:
+							<input type="text" class="infoValue1" id="Event_Name"/><br></td></tr>
+				<tr><td class="info1" colspan="4">Start Date(mm/dd/yyyy)<span class="infoTag1">*</span>:
+							<input type="text" id="datepicker" class="infoValue1" /><br></td></tr>	
+				<tr><td class="info1" colspan="4">Start Time:
+							<select id="TH">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>							
+								<option>4</option>							
+								<option>5</option>							
+								<option>6</option>							
+								<option>7</option>							
+								<option>8</option>							
+								<option>9</option>							
+								<option>10</option>							
+								<option>11</option>							
+								<option>12</option>																
+							</select>:
+							<select id="TM">
+								<option>00</option>							
+								<option>15</option>							
+								<option>30</option>							
+								<option>45</option>							
+							</select>
+							<select id="Tm">
+								<option>AM</option>							
+								<option>PM</option>				
+							</select><br></td></tr>
+				<tr><td class="info1" colspan="4" id="EDt">Event Description<span class="infoTag1">*</span>:
+							<textarea id="ED" placeholder="" class="infoValue1"></textarea></td></tr>
+							
+				<tr><td class="info2" colspan="4">Expected Participants<span class="infoTag2">*</span>:
+							<input type="text" class="infoValue2" id="Ex_parti"/></td></tr>
+				<tr><td class="info2" colspan="4">Venue Locations<span class="infoTag2">*</span>:
+							<input type="text" class="infoValue2" id="V_Loc" /></td></tr>
+				<tr><td class="info2" colspan="4">Class Room:No.
+							<input type="text" id="RNo" /></td></tr>
+				<tr><td class="info2" colspan="4">Guest Details(if Applicable):
+							<input type="text" id="G_Det" /></td></tr>
+				<tr><td class="info2" colspan="4">Budget(if Applicable):
+							<input type="text" id="Budget" /></td></tr>
+				<tr><td class="info2" colspan="4">Sponsors(if Applicable):
+							<input type="text" id="Sponsors" /></td></tr>
+							
+				<tr><td class="info3" colspan="4">Student Co-ordinator Name<span class="infoTag3">*</span>:
+							<input type="text" class="infoValue3" id="SCName" /></td></tr>
+				<tr><td class="info3" colspan="4">Reg. No.<span class="infoTag3">*</span>:
+							<input type="text" class="infoValue3" id="RegNo" /></td></tr>
+				<tr><td class="info3" colspan="4">Mobile No.<span class="infoTag3">*</span>:
+							<input type="text" class="infoValue3" id="SMNo" /></td></tr>
+				<tr><td class="info3" colspan="4">Email ID.<span class="infoTag3">*</span>:
+							<input type="email" class="infoValue3" id="SEid" /></td></tr>
+							
+				<tr><td class="info4" colspan="4">Faculty Co-ordinator Name<span class="infoTag4">*</span>:
+							<input type="text" class="infoValue4" id="FCName" /></td></tr>
+				<tr><td class="info4" colspan="4">Emp.ID.<span class="infoTag4">*</span>:
+							<input type="text" class="infoValue4" id="EmpID" /></td></tr>
+				<tr><td class="info4" colspan="4">Mobile No.<span class="infoTag4">*</span>:
+							<input type="text" class="infoValue4" id="FMNo" /></td></tr>
+				<tr><td class="info4" colspan="4">Email ID.<span class="infoTag4">*</span>:
+							<input type="email" class="infoValue4" id="FEid" /></td></tr>
+								
+		<tr>
+			<th colspan="4" class="button">
+				<input type="submit" value="nextStep" id="nB"></input>			
+			</th>		
+		</tr>
+	</table>
+	<script>
+		var k=0;
+		var j=1;
+		var n = "<%= myvar %>";
+		document.getElementById("Logout").onclick = function () {
+			window.location = "/";
+		};
+		document.getElementById("s1").onclick = function () {
+			if(j<=4){
+				document.getElementById("s"+j).style.borderBottomColor="red";
+				document.getElementById("S"+j).style.display="none";			
+				var x = document.getElementsByClassName("info"+j);
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "none";
+  				}			
+				this.style.borderBottomColor = "black";
+				document.getElementById("S1").style.display="table-cell";
+				document.getElementById("nB").value="nextStep";
+				var x = document.getElementsByClassName("info1");
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "table-cell";
+  				}			
+				j=1;
+			}
+			if(j>4){
+				document.getElementById("s"+4).style.borderBottomColor="red";
+				document.getElementById("S"+4).style.display="none";			
+				var x = document.getElementsByClassName("info"+4);
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "none";
+  				}			
+				this.style.borderBottomColor = "black";
+				document.getElementById("S1").style.display="table-cell";
+				var x = document.getElementsByClassName("info1");
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "table-cell";
+  				}			
+				document.getElementById("nB").value="nextStep";
+				j=1;			
+			}
+		};
+		document.getElementById("s2").onclick = function () {
+			if(j<=4){			
+				document.getElementById("s"+j).style.borderBottomColor="red";
+				document.getElementById("S"+j).style.display="none";
+				var x = document.getElementsByClassName("info"+j);
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "none";
+  				}			
+				this.style.borderBottomColor = "black";
+				document.getElementById("S2").style.display="table-cell";
+				var x = document.getElementsByClassName("info2");
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "table-cell";
+  				}			
+				document.getElementById("nB").value="nextStep";
+				j=2;
+			}
+			if(j>4){
+				document.getElementById("s"+4).style.borderBottomColor="red";
+				document.getElementById("S"+4).style.display="none";			
+				var x = document.getElementsByClassName("info"+4);
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "none";
+  				}			
+				this.style.borderBottomColor = "black";
+				document.getElementById("S2").style.display="table-cell";
+				var x = document.getElementsByClassName("info2");
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "table-cell";
+  				}			
+				document.getElementById("nB").value="nextStep";
+				j=2;			
+			}
+		};
+		document.getElementById("s3").onclick = function () {
+			if(j<=4){			
+				this.style.borderBottomColor = "black";
+				document.getElementById("s"+j).style.borderBottomColor="red";
+				document.getElementById("S"+j).style.display="none";
+				var x = document.getElementsByClassName("info"+j);
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "none";
+  				}			
+				this.style.borderBottomColor = "black";
+				document.getElementById("S3").style.display="table-cell";
+				var x = document.getElementsByClassName("info3");
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "table-cell";
+  				}
+				document.getElementById("nB").value="nextStep";
+				j=3;
+			}
+			if(j>4){
+				document.getElementById("s"+4).style.borderBottomColor="red";
+				document.getElementById("S"+4).style.display="none";			
+				var x = document.getElementsByClassName("info"+4);
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "none";
+  				}			
+				this.style.borderBottomColor = "black";
+				document.getElementById("S3").style.display="table-cell";
+				var x = document.getElementsByClassName("info3");
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "table-cell";
+  				}			
+				document.getElementById("nB").value="nextStep";
+				j=3;			
+			}
+		};
+		document.getElementById("s4").onclick = function () {
+			if(j<=4){			
+				document.getElementById("s"+j).style.borderBottomColor="red";
+				document.getElementById("S"+j).style.display="none";			
+				var x = document.getElementsByClassName("info"+j);
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "none";
+  				}			
+				this.style.borderBottomColor = "black";
+				document.getElementById("S4").style.display="table-cell";
+				var x = document.getElementsByClassName("info4");
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "table-cell";
+  				}			
+				document.getElementById("nB").value="Finish";
+				j=4;
+			}
+			if(j>4){
+				document.getElementById("s"+4).style.borderBottomColor="red";
+				document.getElementById("S"+4).style.display="none";			
+				var x = document.getElementsByClassName("info"+4);
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "none";
+  				}			
+				this.style.borderBottomColor = "black";
+				document.getElementById("S4").style.display="table-cell";
+				var x = document.getElementsByClassName("info4");
+  				for (var i = 0; i < x.length; i++) {
+    				x[i].style.display = "table-cell";
+  				}			
+				document.getElementById("nB").value="Finish";
+				j=4;			
+			}
+		};
+		document.getElementById("nB").onclick = function () {
+			var flag=0;
+			if(j<=4){
+				var w = document.getElementsByClassName("infoTag"+j);
+				var x = document.getElementsByClassName("infoValue"+j);
+				for (var i = 0; i < x.length; i++) {
+    				if(x[i].value == ""){
+    					flag=1;
+    					w[i].style.display = "inline";
+    					//return false;
+    				}
+    				else{
+    					w[i].style.display = "none";
+    				}
+    			}		
+    			if(flag==1) {
+    				alert("Please Fill The Attributes in RED");
+    				return false;	
+    			}
+    			k+=j;
+    			if(j==4) j++;
+    			if(j<4){
+					document.getElementById("s"+j).style.borderBottomColor="red";
+					document.getElementById("S"+j).style.display="none";
+  					var y = document.getElementsByClassName("info"+j);
+  					for (var i = 0; i < y.length; i++) {
+    					y[i].style.display = "none";
+  					}			
+					j++;			
+					document.getElementById("s"+j).style.borderBottomColor="black";
+					document.getElementById("S"+j).style.display="table-cell";
+					var x = document.getElementsByClassName("info"+j);
+  					for (var i = 0; i < x.length; i++) {
+    					x[i].style.display = "table-cell";
+  					}
+  				}
+			}	
+			console.log(k);
+			if(j==5 && k>=10){
+				alert("Form Submitting!!!");
+				var E_N = document.getElementById("Event_Name").value;
+				var E_D = document.getElementById("datepicker").value;
+				var E_D1 = document.getElementById("ED").value;
+				var E_T = document.getElementById("TH").value + ":" + document.getElementById("TM").value + " " +document.getElementById("Tm").value;
+
+				var E_P = document.getElementById("Ex_parti").value;
+				var V = document.getElementById("V_Loc").value;
+				if(!document.getElementById("RNo").value) var R = "NIL";
+				else var R = document.getElementById("RNo").value;
+				if(!document.getElementById("G_Det").value) var G_D = "NIL";
+				else var G_D = document.getElementById("G_Det").value;
+				if(!document.getElementById("Budget").value) var Bud = "NIL";
+				else var Bud = document.getElementById("Budget").value;
+				if(!document.getElementById("Sponsors").value) var Spo = "NIL";
+				else var Spo = document.getElementById("Sponsors").value;
+
+				var SCN = document.getElementById("SCName").value;
+				var RN = document.getElementById("RegNo").value;
+				var SMN = document.getElementById("SMNo").value;
+				var SEI = document.getElementById("SEid").value;
+
+				var FCN = document.getElementById("FCName").value;
+				var EID = document.getElementById("EmpID").value;
+				var FMN = document.getElementById("FMNo").value;
+				var FEI = document.getElementById("FEid").value;
+
+				var data = JSON.stringify({ 'n':n, 'E_Name':E_N, 'E_Date':E_D, 'E_Desc':E_D1, 'E_Time':E_T, 'Expected_Participants':E_P, 'Venue':V, 'Room':R, 'Guest_Details':G_D, 'BudgetE':Bud, 'SponsorsE':Spo, 'SCNE':SCN, 'SCRN':RN, 'SCMN':SMN, 'SCEI':SEI, 'FCNE':FCN, 'FEID':EID, 'FCMN':FMN, 'FCEI':FEI });
+				//console.log(data);
+
+				var xhttp = new XMLHttpRequest();
+  				xhttp.onreadystatechange = function() {
+    				if (this.readyState == 4 && this.status == 200) {
+    					alert("Form Submited Successfully :)");
+    					window.location = '/successLoginCM/'+n;
+    				}
+  				};
+  				xhttp.open('POST', 'http://localhost:3000/EventRegister', true);					
+				xhttp.setRequestHeader("Content-Type", "application/json");
+				xhttp.send(data);	
+
+			}		
+			else if(j==5 && k<10){
+				alert("form not completely filled");
+			}
+
+			if(j==4){
+				this.value="Finish";
+			}
+		};
+		
+	</script>
+</body>
+</html>
