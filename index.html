@@ -1,0 +1,349 @@
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>		
+		<style>	
+			table{
+				border-collapse: collapse;			
+			}			
+			td{
+				border: 2px solid lightblue;
+				text-align: center;
+				padding: 10px;
+						
+			}
+			.H1{
+				width: 100%;
+				background-color: red;			
+				height: 50px;
+				text-align: center;
+				padding-left: 50px;
+				padding-right: 50px;	
+				font-size: 30px;	
+				font-family: Bradley Hand ITC;
+			}	
+			#h1{
+				border-color: red;
+			}
+			.list2{
+				background-color: lightcyan;			
+			}
+			.list1{
+				background-color: lightblue;			
+			}
+			.list3{
+				background-color: lightcyan;	
+				display: none;		
+			}
+			.list4{
+				background-color: lightcyan;	
+				display: none;		
+			}
+			.S_IN{
+				display: none;		
+			}
+			.L_IN{
+				display: table-cell;			
+			}
+			.F_IN{
+				display: none;			
+			}
+			.SL_IN{
+				display: none;			
+			}
+			#SL{
+				padding-top: 5px;			
+			}
+			.tooltiptext {
+    			display: none;
+    			width: 200px;
+    			background-color: lightblue;
+    			color: #fff;
+    			text-align: center;
+    			border-radius: 6px;
+    			padding: 5px;
+    			position: relative;
+    			z-index: 1;
+    			bottom: 150%;
+    			left: 50%;
+    			margin-left: -60px;
+			}
+			.tooltiptext::after {
+    			content: "";
+    			position: absolute;
+    			top: 50%;
+    			right: 100%;
+    			margin-top: -5px;
+    			border-width: 5px;
+    			border-style: solid;
+    			border-color: transparent lightblue transparent transparent;
+			}
+			
+		</style>
+	</head>
+	<body>			
+			<table class="H1">
+				<tr><td id="h1">Welcome To VIT Event Manager</td></tr>							
+			</table>
+			<br>
+			<br>
+			<table align="center">
+				<tr><td class="list1"><a href="#sign_up" id="l1">SignUp</a></td>    
+    				 <td class="list2"><a href="#login" id="l2">Login</a></td>
+  				</tr>
+				
+				<tr><td class="S_IN" id="Club_Name">Club_Name:</td>
+  					 <td class="S_IN"><input type="text" name="clubName_s" id="clbN_s" value="" size="15"></td>
+  				</tr>
+  				<tr><td class="S_IN" id="UserName">UserName:</td>
+  					 <td class="S_IN"><input type="text" name="userid_s" id="uid_s" size="15"></td>
+  				</tr>
+  				<tr><td class="S_IN" id="pp1_s">Password:</td>
+  				    <td class="S_IN"><input type="password" name="p1_s" id="p1_s" size="15" autocomplete="off"></td>
+  				</tr>
+  				<tr><td class="S_IN" id="pp2_s">Confirm Password:</td>
+  					 <td class="S_IN"><input type="password" name="p2_s" id="p2_s" size="15" autocomplete="off"></td>
+  					 <td class="S_IN" style="border-color: white;"><span class="tooltiptext">Password not matching</span></td>
+  				</tr>
+  				<tr><td class="S_IN" id="ee1_s">Email:</td>
+  					 <td class="S_IN"><input type="email" name="e1_s" id="e1_s" size="15"></td>
+  				</tr>
+  				<tr><td class="S_IN" colspan="2"><input type="submit" id="fsu" value="Submit"></td></tr> 
+  				
+  				<tr><td class="L_IN" id="UserName_l">UserName:</td>
+  					 <td class="L_IN"><input type="text" name="userid_l" id="uid_l" value="User Name" size="15"></td></tr>
+  				<tr><td class="L_IN" id="pp1_l">Password:</td>
+	  				 <td class="L_IN"><input type="password" name="p1_l" size="15" id="p1_l" required></td></tr>
+  				<tr><td class="L_IN">Click here for <br><a href="#facultyLogin" id="l3">Faculty Login</a></td>  						
+  					 <td class="L_IN"><input type="submit" id="fl" value="Login"></td></tr>
+  				<tr><td class="L_IN" id="SL" colspan="2">Click here for <a href="#facultyLogin" id="l4">Student Login</a></td>
+  				</tr>
+  				
+  				<tr><td class="list3" colspan="2"><a href="" id="L3">Faculty Login</a></td>
+  				<tr><td class="F_IN" id="FacultyName_l">Faculty Name:</td>
+  					 <td class="F_IN"><input type="text" name="Facultyid_l" id="Fid_l" value="Faculty Name" size="15"></td></tr>
+  				<tr><td class="F_IN" id="pF1_l">Password:</td>
+	  				 <td class="F_IN"><input type="password" name="F1_l" size="15" id="F1_l" required></td></tr>
+  				<tr><td class="F_IN" colspan="2"><input type="submit" id="Fl" value="Login"></td>
+  				</tr>
+  				
+  				<tr><td class="list4" colspan="2"><a href="" id="L4">Student Login</a></td>
+  				<tr><td class="SL_IN" id="StudentName_l">Student Name:</td>
+  					 <td class="SL_IN"><input type="text" name="Studentid_l" id="SLid_l" value="Student Name" size="15"></td></tr>
+  				<tr><td class="SL_IN" id="pSL1_l">Password:</td>
+	  				 <td class="SL_IN"><input type="password" name="SL1_l" size="15" id="SL1_l" required></td></tr>
+  				<tr><td class="SL_IN" colspan="2"><input type="submit" id="SLl" value="Login"></td>
+  				</tr>
+  			</table>	
+	<script>
+			var s=1;
+			var xhttp = new XMLHttpRequest();
+		$(document).ready(function () {
+		
+			$("#l1").click(function () {
+			
+				if(s==0){			
+					$(".list1").css("background-color","lightcyan");
+					$(".S_IN").show();
+					s=1;
+				}	
+				else{
+					$(".list2").css("background-color","lightblue");
+					$(".list1").css("background-color","lightcyan");
+					$(".L_IN").hide();
+					$(".S_IN").show();
+					s=1;			
+				}
+			});
+			$("#l2").click(function () {
+				if(s==0){			
+					$(".list2").css("background-color","lightcyan");
+					$(".L_IN").show();
+					s=1;
+				}
+				else{
+					$(".list1").css("background-color","lightblue");
+					$(".list2").css("background-color","lightcyan");
+					$(".S_IN").hide();
+					$(".L_IN").show();
+					s=1;			
+				}
+			});
+		
+			$("#uid1_s").change(function () {
+				var n=$(this).val();
+				console.log(n);
+				xhttp.open('POST', 'http://localhost:3000/name', true);					
+				xhttp.setRequestHeader("Content-Type", "application/json");
+				xhttp.send(JSON.stringify({'name' : n}));	
+				xhttp.onreadystatechange = function() {
+			   	if (this.readyState == 4 && this.status == 200) {
+						console.log("message_aaya_aaya_aaya");				   	
+  					}
+				};				
+			});
+			$("#l3").click(function () {
+				$(".list1").hide();
+				$(".list2").hide();
+				$(".L_IN").hide();
+				$(".list3").show();
+				$(".F_IN").show();
+				
+			});
+			$("#l4").click(function () {
+				$(".list1").hide();
+				$(".list2").hide();
+				$(".L_IN").hide();
+				$(".list4").show();
+				$(".SL_IN").show();
+				
+			});
+			$("#p2_s").keyup(function () {
+				var p=$(this).val();
+				var p1=$("#p1_s").val();
+				if(p!=p1)
+				$(".tooltiptext").show();
+				else 
+				$(".tooltiptext").hide();
+			});
+			
+			$("#fsu").click(function(){
+				var flag=0;
+        		
+        		if($("#clbN_s").val().length==0){
+					$("#Club_Name").css("color", "red");        			
+        			flag++;
+        		}
+        		else{
+					$("#Club_Name").css("color", "black");        			
+        			flag--;        		
+        		}
+        		if($("#uid_s").val().length==0){
+					$("#UserName").css("color", "red");        			
+        			flag++;
+        		}
+        		else{
+					$("#UserName").css("color", "black");        			
+        			flag--;        		
+        		}
+        		if($("#p1_s").val().length==0){
+					$("#pp1_s").css("color", "red");        			
+        			flag++;
+        		}
+        		else{
+					$("#pp1_s").css("color", "black");        			
+        			flag--;        		
+        		}
+        		if($("#p2_s").val().length==0){
+					$("#pp2_s").css("color", "red");        			
+        			flag++;
+        		}
+        		else{
+					$("#pp2_s").css("color", "black");        			
+        			flag--;        		
+        		}
+        		if($("#e1_s").val().length==0){
+					$("#ee1_s").css("color", "red");        			
+        			flag++;
+        		}
+        		else{
+					$("#ee1_s").css("color", "black");        			
+        			flag--;        		
+        		}
+
+        		if(flag<=0){        			
+        			alert("Submitted");
+        			var clubName_s = $("#clbN_s").val();
+        			var userid_s = $("#uid_s").val();
+        			var password = $("#p1_s").val();
+        			var e1_s = $("#e1_s").val();
+        			console.log(password);
+        				$.ajax({
+        					type: 'POST',
+        					data: JSON.stringify({'clubName_s' : clubName_s, 'userid_s' : userid_s, 'p1_s' : password, 'e1_s' : e1_s }),
+        					contentType: 'application/json',
+        					url: 'http://localhost:3000/sign_up',
+        					success: function(data) {
+            					console.log(JSON.stringify(data));
+            					//JSON.stringify(data);
+            					window.location = data.redirect;
+        					}
+    					});
+				} 
+        		else{
+        			alert("Please fill the fields in red.");        			
+        			return false;
+        		}
+
+    		});
+    		$("#fl").click(function(){
+        		if($("#uid_l").val().length==0 || $("#uid_l").val()=="User Name"){
+					$("#UserName_l").css("color", "red");        			
+        			alert("Please fill the fields in red.");        			
+        			return false;
+        		}
+        		else{
+					$("#UserName_l").css("color", "black");        			
+        			alert("Submitted");
+        			var n = $("#uid_l").val();
+        			var p = $("#p1_l").val();
+        				$.ajax({
+        					type: 'POST',
+        					data: JSON.stringify({'name' : n, 'password' : p }),
+        					contentType: 'application/json',
+        					url: 'http://localhost:3000/login',
+        					success: function(data) {
+            					console.log(JSON.stringify(data));
+            					JSON.stringify(data);
+            					window.location = data.redirect;
+            					
+        					}
+    					});
+					};	       		
+        					
+        	});
+        	$("#Fl").click(function(){
+        		if($("#Fid_l").val().length==0 || $("#Fid_l").val()=="User Name"){
+					$("#FacultyName_l").css("color", "red");        			
+        			alert("Please fill the fields in red.");        			
+        			return false;
+        		}
+        		else{
+					$("#FacultyName_l").css("color", "black");        			
+        			alert("Submitted");
+        			var n = $("#Fid_l").val();
+        			var p = $("#F1_l").val();
+    				$.ajax({
+    					type: 'POST',
+    					data: JSON.stringify({'name' : n, 'password' : p }),
+    					contentType: 'application/json',
+    					url: 'http://localhost:3000/loginFaculty',
+    					success: function(data) {
+        					console.log(JSON.stringify(data));
+        					JSON.stringify(data);
+        					window.location = data.redirect;
+        					
+    					}
+					});
+				};	       		
+        					
+        	});
+        	$("#SLl").click(function(){
+        		if($("#SLid_l").val().length==0 || $("#SLid_l").val()=="User Name"){
+					$("#StudentName_l").css("color", "red");        			
+        			alert("Please fill the fields in red.");        			
+        			return false;
+        		}
+        		else{
+					$("#FacultyName_l").css("color", "black");        			
+        			alert("Submitted");
+        			var n = $("#SLid_l").val();
+        			var p = $("#SL1_l").val();
+    				if(p=="student")
+    					window.location = "/successLoginS"
+				};	       		
+        					
+        	});
+    	});
+	</script>
+	</body>
+</html>
