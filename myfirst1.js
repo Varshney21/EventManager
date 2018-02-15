@@ -116,12 +116,14 @@ app.post('/loginFaculty', function (req, res) {
     //Execute the SQL statement, with the value array:
     con.query(sql, [name], function (err, result) {
       //if (err) throw err;
-        if(result[0].password==password){
+        if(result[0].password==password && result[0].Emp_id != "00000"){
           console.log('Login Successful');      
-          person=1; 
-          //res.locals.username = name;
           res.send({redirect:'/successLoginFC/'+name });
           //res.redirect('/successLoginCM');
+        }
+        else if(result[0].password==password && result[0].Emp_id == "00000"){
+          console.log("lodo aayo");
+          res.send({redirect:'/successLoginADSW/'+name });
         }
         else console.log('Incorrect password');
       //con.end();
@@ -159,10 +161,36 @@ app.get('/successLoginFC/:name',function(req,res){
   
 });
 
+app.get('/successLoginADSW/:name',function(req,res){
+  console.log('ADSW');
+  var f_name = req.params.name;
+  var Ename = [];
+  con.connect(function(err) {
+      console.log("Connected!");
+      var sql = 'SELECT * FROM event WHERE E_Permission="Approve"';
+      //Execute the SQL statement, with the value array:
+      con.query(sql, [f_name], function (err, result) {
+        //if (err) throw err;
+        for(i=0;i<result.length;i++){
+          var elem = new Object();
+          elem["Event"] = result[i].Event_Name;
+          console.log(elem);
+          Ename.push(elem);
+          //Ename.push(result[i].Event_Name);
+        }
+        console.log(Ename);
+        res.render(path.join(__dirname+'/login4.html'),{ myvar: req.params.name, Event_Name: Ename });
+      }); 
+      
+  });
+  
+});
+
 app.get('/successLoginS',function(req,res){
   console.log('S');
   res.sendFile(path.join(__dirname+'/login3.html'));
 });
+
 
 app.post('/EventRegister',function(req,res){
 	var n = req.body.n;
@@ -227,7 +255,7 @@ app.post('/EventInfoDate',function(req,res){
   console.log(E_date);
   con.connect(function(err) {
       console.log("Connected!");
-      var sql = 'SELECT * FROM event WHERE Event_Date = ?';
+      var sql = 'SELECT * FROM event WHERE Event_Date = ? and ADSW_per = "Approve";';
       //Execute the SQL statement, with the value array:
       con.query(sql, [E_date], function (err, result) {
         //if (err) throw err;
@@ -255,6 +283,21 @@ app.post('/Faculty',function(req,res){
   });
 });
 
+app.post('/ADSW',function(req,res){
+  var p = req.body.Permission;
+  var Event = req.body.Event_Name;
+  con.connect(function(err) {
+      console.log("Connected!");
+      var sql = 'UPDATE event SET ADSW_per = ? WHERE Event_Name = ?';
+      //Execute the SQL statement, with the value array:
+      con.query(sql, [p,Event], function (err, result) {
+        //if (err) throw err;
+        //var data = JSON.stringify(result);
+        res.status(200).end();
+      }); 
+  });
+});
+
 app.post('/EventCalender',function(req,res){
   var d = new Date();
   var m = d.getMonth();
@@ -262,20 +305,23 @@ app.post('/EventCalender',function(req,res){
   console.log(m);
   con.connect(function(err){
     console.log("Connected!");
-    var sql = 'SELECT Event_Name,Event_Date FROM event;'
+    var sql = 'SELECT Event_Name,Event_Date FROM event  where ADSW_per = "Approve";';
     con.query(sql,function(err, result){
-      for(var i=0;i<result.length;i++){
-        var msec = Date.parse(result[i].Event_Date);
-        var E_d = new Date(msec);
-        var E_month= E_d.getMonth();
-        console.log(E_month);
-        if(E_month==m){
-          console.log(result[i].Event_Name);
-          var elem = new Object();
-          elem["E_Name"] = result[i].Event_Name;
-          elem["E_Date"] = result[i].Event_Date;
+      console.log(result);
+      if(result != []){
+        for(var i=0;i<result.length;i++){
+          var msec = Date.parse(result[i].Event_Date);
+          var E_d = new Date(msec);
+          var E_month= E_d.getMonth();
+          console.log(E_month);
+          if(E_month==m){
+            console.log(result[i].Event_Name);
+            var elem = new Object();
+            elem["E_Name"] = result[i].Event_Name;
+            elem["E_Date"] = result[i].Event_Date;
+          }
+          Event.push(elem);
         }
-        Event.push(elem);
       }
       console.log(Event);
       var data = JSON.stringify(Event);

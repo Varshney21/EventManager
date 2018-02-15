@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+		table{
+			width:100%;	
+			border-collapse: collapse;	
+		}
+		tr{
+			border-collapse: collapse;		
+		}		
+		td{
+			#border:2px solid black;		
+		}
+		.H0{
+			background-color: white;
+			background-position: center;			
+			height: 50px;
+			text-align: left;
+			#font-size: 20px;	
+			padding-left: 50px;
+			padding-right: 50px;	
+			font-size: 30px;	
+			font-family: Comic Sans MS;
+		}	
+		.H1{
+			background-color: red;
+			background-position: center;			
+			height: 50px;
+			text-align: left;
+			#font-size: 20px;	
+			padding-left: 50px;
+			padding-right: 50px;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+		}	
+		#LO{
+			background-color: red;
+			text-align: center;
+		}
+		#L1{
+			padding-top: 15px;
+			background-color: white;
+			text-align: center;
+		}
+		.info1{
+			text-align: center;
+			padding-bottom: 2px;
+			#padding-right: 130px;
+			background-color: white;
+			display: table-cell;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+			vertical-align: middle;
+		}
+		.info2{
+			text-align: right;
+			padding-bottom: 2px;
+			padding-right: 130px;
+			background-color: white;
+			display: none;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+			vertical-align: middle;
+		}
+		.info3{
+			text-align: center;
+			padding-bottom: 2px;
+			#padding-right: 130px;
+			background-color: white;
+			display: none;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+			vertical-align: middle;
+		}
+		.info4{
+			text-align: center;
+			padding-bottom: 2px;
+			#padding-right: 130px;
+			background-color: white;
+			display: none;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+			vertical-align: middle;
+		}
+		.info5{
+			text-align: center;
+			padding-bottom: 2px;
+			#padding-right: 130px;
+			background-color: white;
+			display: none;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+			vertical-align: middle;
+		}
+		input[type=text]{
+			width: 60%;
+			border: 2px solid lightblue;
+    		border-radius: 4px;
+    		padding: 10px;
+    		font-size: 20px;
+    		font-family: Comic Sans MS;
+    		background-color: white;
+		}
+		input[type=button]{
+			border-radius: 4px;
+			font-size: 20px;
+			font-family: Comic Sans MS;
+			background-color: #fff;
+			border: 2px solid blue;
+		}
+		select{
+			width: 40%;
+			border: 2px solid lightblue;
+    		border-radius: 4px;
+    		padding: 10px;
+    		font-size: 20px;
+    		font-family: Comic Sans MS;
+		}
+		#form{
+			padding-top: 25px;
+		}
+		.ED{
+			###padding-right: 40px;
+			width: 100%;
+    		height: 150px;
+    		padding: 12px 20px;
+    		box-sizing: border-box;
+    		border: 2px solid lightblue;
+    		border-radius: 4px;
+    		background-color: #fff;
+    		font-family: Comic Sans MS;
+    		font-size: 20px;
+    		resize: none;		
+		}
+		#EDt{
+			text-align: left;
+			padding-left: 160px;		
+		}
+		#head{
+			text-align: center;
+		}
+		</style>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td class="H1" colspan="3">Hi....<%= myvar %> Welcome To Event Manager</td>
+				<td id="LO"><input type="button" id="Logout" value="Logout"></input></td>		
+			</tr>
+			<tr>
+				<td class="H1" id="head" colspan="4">Assistant Dean of Student Welfare</td>
+			</tr>
+			<tr>
+				<td class="H0" colspan="4">These are the events Approved by respective Event Faculty Coordinators.All the Details are correct and Authentic.The Event Needs final Approval By ADSW</td>
+			</tr>
+			<tr>
+				<td class="info1" id="form" colspan="4">Events Requested For Approval:
+					<select id="myDropdown">
+						<option>--Select An Event--</option>
+						<% Event_Name.forEach(function(name) { %>
+      						<option><%= name.Event %></option>
+    					<% }); %>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td id="L1" class="info1" colspan="4"><input type="button" id="Submit" value="SUBMIT"></td>
+			</tr>
+
+			<tr><td class="info3" colspan="4">Event Information<br></td></tr>
+			<tr><td class="info2" colspan="4">Event Name:
+							<input type="text" id="Event_Name" disabled/><br></td></tr>
+			<tr><td class="info2" colspan="4">Start Date(mm/dd/yyyy):
+							<input type="text" id="datepicker" disabled/><br></td></tr>	
+			<tr><td class="info2" colspan="4">Event Time:
+							<input type="text" id="time" disabled/><br></td></tr>
+			<tr><td class="info2" colspan="4">Event Description:
+							<input type="text" id="Event_Desc" disabled/><br></td></tr>
+			
+			<tr><td class="info3" colspan="4">Venue Information<br></td></tr>
+			<tr><td class="info2" colspan="4">Expected Participants:
+							<input type="text" id="Exp_Parti" disabled/><br></td></tr>
+			<tr><td class="info2" colspan="4">Event Venue:
+							<input type="text" id="Event_Venue" disabled/><br></td></tr>
+			<tr><td class="info2" colspan="4">Class Room No.:
+							<input type="text" id="Event_RNo" disabled/><br></td></tr>
+			<tr><td class="info2" colspan="4">Guest Details:
+							<input type="text" id="GD" disabled/><br></td></tr>
+			<tr><td class="info2" colspan="4">Event Budget:
+							<input type="text" id="Event_Bud" disabled/><br></td></tr>
+			<tr><td class="info2" colspan="4">Event Sponcers:
+							<input type="text" id="Event_Spos" disabled/><br></td></tr>
+			
+			<tr><td class="info3" colspan="4">Student Coordinator Information<br></td></tr>
+			<tr><td class="info2" colspan="4">Student Coordinator Name:
+							<input type="text" id="E_SCN" disabled/><br></td></tr>
+			<tr><td class="info2" colspan="4">Student Coordinator Reg.No.:
+							<input type="text" id="E_SCRN" disabled/><br></td></tr>
+			<tr><td class="info2" colspan="4">Student Coordinator MobileNo.:
+							<input type="text" id="E_SCMN" disabled/><br></td></tr>
+			<tr><td class="info2" colspan="4">Student Coordinator EmailId:
+							<input type="text" id="E_SCE" disabled/><br></td></tr>
+			
+			<tr>
+				<td id="L1" colspan="4" class="info2"><input type="button" id="back" value="BACK">
+													  <input type="button" id="approve" value="Approve Event">
+													  <input type="button" id="reject" value="Reject Event"></td>
+			</tr>
+
+			<tr><td class="info4" colspan="4">Confirm Approval Of Event</td>
+			</tr>
+			<tr>
+				<td class="info4" colspan="4">
+					<input type="button" id="back1" value="BACK">
+					<input type="button" id="F_Approval" value="APPROVE"></td>
+			</tr>
+
+			<tr><td class="info5" colspan="4">Confirm Rejection Of Event</td>
+			</tr>
+			<tr>
+				<td class="info5" colspan="4">
+					<input type="button" id="back2" value="BACK">
+					<input type="button" id="F_Reject" value="REJECT"></td>
+			</tr>
+		</table>	
+	</body>
+	<script>
+		var n = "<%= myvar %>";
+		document.getElementById("Logout").onclick = function () {
+			window.location = "/";
+		};
+		document.getElementById("Submit").onclick = function(){
+			var Event = document.getElementById("myDropdown").value;
+			if(Event != "--Select An Event--"){
+				var data = JSON.stringify({'Event':Event});
+				var xhttp = new XMLHttpRequest();
+				var result;
+				var x = document.getElementsByClassName("info1");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "none";
+				}
+				var x = document.getElementsByClassName("info2");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "table-cell";
+				}var x = document.getElementsByClassName("info3");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "table-cell";
+				}
+  				xhttp.onreadystatechange = function() {
+    				if (this.readyState == 4 && this.status == 200) {
+    					console.log("Form Submited Successfully :)");
+    					//window.location = '/successLoginCM/'+n;
+    					result = JSON.parse(this.responseText);
+    					console.log(result[0]);
+
+    					document.getElementById("Event_Name").value = result[0].Event_Name;
+    					document.getElementById("datepicker").value = result[0].Event_Date;
+    					document.getElementById("time").value = result[0].Event_Time;
+    					document.getElementById("Event_Desc").value = result[0].Event_Desc;
+    					document.getElementById("Exp_Parti").value = result[0].Exp_Parti;
+    					document.getElementById("Event_Venue").value = result[0].Event_Venue;
+    					document.getElementById("Event_RNo").value = result[0].Event_RNo;
+    					document.getElementById("GD").value = result[0].Guest_Det;
+    					document.getElementById("Event_Bud").value = result[0].Event_Bud;
+    					document.getElementById("Event_Spos").value = result[0].Event_Spo;
+    					document.getElementById("E_SCN").value = result[0].E_SCN;
+    					document.getElementById("E_SCRN").value = result[0].E_SCRN;
+    					document.getElementById("E_SCMN").value = result[0].E_SCMN;
+    					document.getElementById("E_SCE").value = result[0].E_SCEI;
+    				}
+  				};
+  				xhttp.open('POST', 'http://localhost:3000/EventInfo', true);					
+				xhttp.setRequestHeader("Content-Type", "application/json");
+				xhttp.send(data);
+			}
+		};
+		document.getElementById("back").onclick = function(){
+			var x = document.getElementsByClassName("info1");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "table-cell";
+				}
+				var x = document.getElementsByClassName("info2");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "none";
+				}var x = document.getElementsByClassName("info3");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "none";
+				}
+				document.getElementById("myDropdown").value = "--Select An Event--";
+		};
+		document.getElementById("approve").onclick = function(){
+				var x = document.getElementsByClassName("info4");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "table-cell";
+				}
+				var x = document.getElementsByClassName("info2");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "none";
+				}var x = document.getElementsByClassName("info3");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "none";
+				}
+				//document.getElementById("myDropdown").value = "--Select An Event--";
+		};
+		document.getElementById("back1").onclick = function(){
+				var x = document.getElementsByClassName("info4");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "none";
+				}
+				var x = document.getElementsByClassName("info2");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "table-cell";
+				}var x = document.getElementsByClassName("info3");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "table-cell";
+				}
+				//document.getElementById("myDropdown").value = "--Select An Event--";
+		};
+		document.getElementById("reject").onclick = function(){
+				var x = document.getElementsByClassName("info5");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "table-cell";
+				}
+				var x = document.getElementsByClassName("info2");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "none";
+				}var x = document.getElementsByClassName("info3");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "none";
+				}
+				//document.getElementById("myDropdown").value = "--Select An Event--";
+		};
+		document.getElementById("back2").onclick = function(){
+			var x = document.getElementsByClassName("info5");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "none";
+				}
+				var x = document.getElementsByClassName("info2");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "table-cell";
+				}var x = document.getElementsByClassName("info3");
+				for(var i=0;i<x.length;i++){
+					x[i].style.display = "table-cell";
+				}
+				//document.getElementById("myDropdown").value = "--Select An Event--";
+		};
+		document.getElementById("F_Approval").onclick = function(){
+			var E_name = document.getElementById("Event_Name").value;
+			var data = JSON.stringify({'Permission':'Approve', 'Event_Name':E_name });
+			var xhttp = new XMLHttpRequest();
+  			xhttp.onreadystatechange = function() {
+    			if (this.readyState == 4 && this.status == 200) {
+    				alert("Form Submited Successfully :)");
+    				window.location = '/successLoginADSW/'+n;
+    			}
+  			};
+  			xhttp.open('POST', 'http://localhost:3000/ADSW', true);					
+			xhttp.setRequestHeader("Content-Type", "application/json");
+			xhttp.send(data);
+		};
+		document.getElementById("F_Reject").onclick = function(){
+			var E_name = document.getElementById("Event_Name").value;
+			var data = JSON.stringify({'Permission':'Reject', 'Event_Name':E_name });
+			var xhttp = new XMLHttpRequest();
+  			xhttp.onreadystatechange = function() {
+    			if (this.readyState == 4 && this.status == 200) {
+    				alert("Form Submited Successfully :)");
+    				window.location = '/successLoginADSW/'+n;
+    			}
+  			};
+  			xhttp.open('POST', 'http://localhost:3000/ADSW', true);					
+			xhttp.setRequestHeader("Content-Type", "application/json");
+			xhttp.send(data);
+		};
+	</script>
+</html>
