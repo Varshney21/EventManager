@@ -90,8 +90,20 @@
 				window.location = "/successLoginCM/"+n;
 			};
 			function del(E_name,A_Per,F_Per){
-				if(A_Per == "" && F_Per == "")
+				if(A_Per == "" && F_Per == "" || A_Per == "Reject" || F_Per == "Reject"){
 					console.log("DELETE Kar");
+					var xhttp = new XMLHttpRequest();
+					xhttp.onreadystatechange = function() {
+    					if (this.readyState == 4 && this.status == 200) {
+    						alert("Event got Deleted");
+    						window.location = "/EventHistory/"+n;
+    					}
+    				}
+					var data = JSON.stringify({'Event_Name':E_name});
+					xhttp.open('POST', 'http://localhost:3000/EventDel', true);					
+					xhttp.setRequestHeader("Content-Type", "application/json");
+					xhttp.send(data);
+				}
 				else{
 					alert("Not Possible To Delete");
 				}

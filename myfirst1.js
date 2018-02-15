@@ -331,19 +331,6 @@ app.post('/EventCalender',function(req,res){
   });
 });
 
-app.post('/logout',function(req,res){    
-  req.session.destroy(function(err){  
-      if(err){  
-          console.log(err);  
-      }  
-      else  
-      {  
-          res.end(JSON.stringify({"redirect":'/'}));
-          //res.redirect('/');  
-      }  
-  });
-});
-
 app.get('/EventHistory/:name',function(req,res){
   var n = req.params.name;
   console.log(n);
@@ -367,6 +354,20 @@ app.get('/EventHistory/:name',function(req,res){
         console.log(Ename);
         res.render(path.join(__dirname+'/History.html'),{ myvar: req.params.name, Event_Name: Ename });
         //res.status(200).end(data);
+      }); 
+  });
+});
+
+app.post('/EventDel',function(req,res){
+  var Event = req.body.Event_Name;
+  con.connect(function(err) {
+      console.log("Connected!");
+      var sql = 'DELETE FROM event WHERE Event_Name = ?';
+      //Execute the SQL statement, with the value array:
+      con.query(sql, [Event], function (err, result) {
+        //if (err) throw err;
+        //var data = JSON.stringify(result);
+        res.status(200).end();
       }); 
   });
 });
