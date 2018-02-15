@@ -344,4 +344,31 @@ app.post('/logout',function(req,res){
   });
 });
 
+app.get('/EventHistory/:name',function(req,res){
+  var n = req.params.name;
+  console.log(n);
+  var Ename = [];
+   con.connect(function(err) {
+      console.log("Connected!");
+      var sql = 'SELECT Event_Name,E_Permission,ADSW_per FROM event WHERE Login_name = ?';
+      //Execute the SQL statement, with the value array:
+      con.query(sql, [n], function (err, result) {
+        //if (err) throw err;
+        //var data = JSON.stringify(result);
+        for(i=0;i<result.length;i++){
+          var elem = new Object();
+          elem["Event"] = result[i].Event_Name;
+          elem["F_Per"] = result[i].E_Permission;
+          elem["A_Per"] = result[i].ADSW_per;
+          console.log(elem);
+          Ename.push(elem);
+          //Ename.push(result[i].Event_Name);
+        }
+        console.log(Ename);
+        res.render(path.join(__dirname+'/History.html'),{ myvar: req.params.name, Event_Name: Ename });
+        //res.status(200).end(data);
+      }); 
+  });
+});
+
 app.listen(3000);

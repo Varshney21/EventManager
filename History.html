@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			table{
+			width:100%;	
+			border-collapse: collapse;	
+		}
+		tr{
+			border-collapse: collapse;		
+		}		
+		td , th{
+			border:2px solid black;		
+		}
+		.H1{
+			background-color: red;
+			background-position: center;			
+			height: 50px;
+			text-align: left;
+			#font-size: 20px;	
+			padding-left: 50px;
+			padding-right: 50px;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+		}	
+		#LO{
+			background-color: red;
+			text-align: center;
+		}
+		#L1{
+			background-color: white;
+			text-align: center;
+		}
+		.info1{
+			text-align: center;
+			padding-bottom: 2px;
+			#padding-right: 130px;
+			background-color: white;
+			display: table-cell;	
+			font-size: 30px;	
+			font-family: Bradley Hand ITC;
+			vertical-align: middle;
+		}
+		input[type=button]{
+			border-radius: 4px;
+			font-size: 20px;
+			font-family: Comic Sans MS;
+			background-color: #fff;
+			border: 2px solid blue;
+		}
+		#T1{
+			width: 40%;
+		}
+		#T2{
+			width: 25%;
+		}
+		#T3{
+			width: 25%;
+		}
+		#T4{
+			width: 10%;
+		}
+		</style>
+	</head>
+	<body>
+		<table>
+			<tr>
+				<td class="H1" colspan="3">Hi....<%= myvar %> Welcome To Event Manager</td>
+				<td id="LO"><input type="button" id="BACK" value="BACK"></input></td>		
+			</tr>
+			<tr><td class="info1" id="form" colspan="4">Events Posted For Approval:</td>
+			</tr>
+			<tr><th class="info1" id="T1">Event Name</th>
+				<th class="info1" id="T2">ADSW Permission Status</th>
+				<th class="info1" id="T3">Faculty Coordinator Permission Status</th>
+				<th class="info1" id="T4">Delete Event</th>
+			</tr>
+				<% Event_Name.forEach(function(name) { %>
+						<tr>
+						<td class="info1"><%= name.Event %></td>
+						<td class="info1"><%= name.A_Per %></td>
+						<td class="info1"><%= name.F_Per %></td>
+						<td id="L1"><input type="button" onclick="del('<%= name.Event %>','<%= name.A_Per %>','<%= name.F_Per %>')" value="DELETE"></td>
+						</tr>
+				<% }); %>
+		</table>	
+		<script>
+			var n = "<%= myvar %>";
+			document.getElementById("BACK").onclick = function () {
+				window.location = "/successLoginCM/"+n;
+			};
+			function del(E_name,A_Per,F_Per){
+				if(A_Per == "" && F_Per == "")
+					console.log("DELETE Kar");
+				else{
+					alert("Not Possible To Delete");
+				}
+			}
+		</script>
+	</body>
+</html>

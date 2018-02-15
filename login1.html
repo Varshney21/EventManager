@@ -223,7 +223,8 @@
 	<table>
 		<tr>
 			<td class="H1" colspan="3">Hi....<%= myvar %> Welcome To Event Manager</td>
-			<td id="LO"><input type="button" id="Logout" value="Logout"></input></td>		
+			<td id="LO"><input type="button" id="Logout" value="Logout"></input>
+						<input type="button" id="EventHistory" value="Event History"></input></td>		
 		</tr>	
 		<tr>
 			<td class="steps" id="s1">Step1.</td>
@@ -312,6 +313,13 @@
 		var n = "<%= myvar %>";
 		document.getElementById("Logout").onclick = function () {
 			window.location = "/";
+		};
+		document.getElementById("EventHistory").onclick = function () {
+			window.location = "/EventHistory/"+n;
+			//var xhttp = new XMLHttpRequest();
+			//xhttp.open('GET', 'http://localhost:3000/EventHistory/<%= myvar %>', true);					
+			//xhttp.setRequestHeader("Content-Type", "application/json");
+			//xhttp.send();
 		};
 		document.getElementById("s1").onclick = function () {
 			if(j<=4){
