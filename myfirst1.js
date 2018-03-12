@@ -97,8 +97,11 @@ app.post('/login', function (req, res) {
 					res.send({redirect:'/successLoginCM/'+name });
 					//res.redirect('/successLoginCM');
 				}
-				else console.log('Incorrect password');
-			//con.end();
+				else{
+          console.log('Incorrect password');
+          res.send({redirect:'incorrect password' });
+			  }
+      //con.end();
 		}); 
 	});
 });
@@ -125,7 +128,10 @@ app.post('/loginFaculty', function (req, res) {
           console.log("lodo aayo");
           res.send({redirect:'/successLoginADSW/'+name });
         }
-        else console.log('Incorrect password');
+        else{
+          console.log('Incorrect password');
+          res.send({redirect:'incorrect password' });
+        }
       //con.end();
     }); 
   });

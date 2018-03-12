@@ -90,7 +90,7 @@
 				<tr><td class="list1"><a href="#sign_up" id="l1">SignUp</a></td>    
     				 <td class="list2"><a href="#login" id="l2">Login</a></td>
   				</tr>
-				
+				<!--Sign Up-->
 				<tr><td class="S_IN" id="Club_Name">Club_Name:</td>
   					 <td class="S_IN"><input type="text" name="clubName_s" id="clbN_s" value="" size="15"></td>
   				</tr>
@@ -109,26 +109,27 @@
   				</tr>
   				<tr><td class="S_IN" colspan="2"><input type="submit" id="fsu" value="Submit"></td></tr> 
   				
+        <!--Club Member Login-->
   				<tr><td class="L_IN" id="UserName_l">UserName:</td>
-  					 <td class="L_IN"><input type="text" name="userid_l" id="uid_l" value="User Name" size="15"></td></tr>
+  					 <td class="L_IN"><input type="text" name="userid_l" id="uid_l" placeholder="User Name" size="15"></td></tr>
   				<tr><td class="L_IN" id="pp1_l">Password:</td>
 	  				 <td class="L_IN"><input type="password" name="p1_l" size="15" id="p1_l" required></td></tr>
   				<tr><td class="L_IN">Click here for <br><a href="#facultyLogin" id="l3">Faculty Login</a></td>  						
   					 <td class="L_IN"><input type="submit" id="fl" value="Login"></td></tr>
   				<tr><td class="L_IN" id="SL" colspan="2">Click here for <a href="#facultyLogin" id="l4">Student Login</a></td>
   				</tr>
-  				
+  			<!--Faculty Login-->
   				<tr><td class="list3" colspan="2"><a href="" id="L3">Faculty Login</a></td>
   				<tr><td class="F_IN" id="FacultyName_l">Faculty Name:</td>
-  					 <td class="F_IN"><input type="text" name="Facultyid_l" id="Fid_l" value="Faculty Name" size="15"></td></tr>
+  					 <td class="F_IN"><input type="text" name="Facultyid_l" id="Fid_l" placeholder="Faculty Name" size="15"></td></tr>
   				<tr><td class="F_IN" id="pF1_l">Password:</td>
 	  				 <td class="F_IN"><input type="password" name="F1_l" size="15" id="F1_l" required></td></tr>
   				<tr><td class="F_IN" colspan="2"><input type="submit" id="Fl" value="Login"></td>
   				</tr>
-  				
+  			<!--Student Login-->
   				<tr><td class="list4" colspan="2"><a href="" id="L4">Student Login</a></td>
   				<tr><td class="SL_IN" id="StudentName_l">Student Name:</td>
-  					 <td class="SL_IN"><input type="text" name="Studentid_l" id="SLid_l" value="Student Name" size="15"></td></tr>
+  					 <td class="SL_IN"><input type="text" name="Studentid_l" id="SLid_l" placeholder="Student Name" size="15"></td></tr>
   				<tr><td class="SL_IN" id="pSL1_l">Password:</td>
 	  				 <td class="SL_IN"><input type="password" name="SL1_l" size="15" id="SL1_l" required></td></tr>
   				<tr><td class="SL_IN" colspan="2"><input type="submit" id="SLl" value="Login"></td>
@@ -276,71 +277,120 @@
 
     		});
     		$("#fl").click(function(){
-        		if($("#uid_l").val().length==0 || $("#uid_l").val()=="User Name"){
-					$("#UserName_l").css("color", "red");        			
-        			alert("Please fill the fields in red.");        			
-        			return false;
+          var flag=0;
+        		if($("#uid_l").val().length==0){
+					    $("#UserName_l").css("color", "red");        			
+        		  flag++;
         		}
+            else{
+              $("#UserName_l").css("color", "black");              
+            }
+            if($("#p1_l").val().length==0){
+              $("#pp1_l").css("color", "red");
+              flag++;
+            }
+            else{
+              $("#pp1_l").css("color","black");
+            }
+            if(flag!=0){
+              alert("Please fill the fields in red.");              
+              return false;
+            }
         		else{
-					$("#UserName_l").css("color", "black");        			
-        			alert("Submitted");
-        			var n = $("#uid_l").val();
-        			var p = $("#p1_l").val();
-        				$.ajax({
-        					type: 'POST',
-        					data: JSON.stringify({'name' : n, 'password' : p }),
-        					contentType: 'application/json',
-        					url: 'http://localhost:3000/login',
-        					success: function(data) {
-            					console.log(JSON.stringify(data));
-            					JSON.stringify(data);
-            					window.location = data.redirect;
-            					
-        					}
-    					});
-					};	       		
+    					$("#UserName_l").css("color", "black");  
+            			var n = $("#uid_l").val();
+            			var p = $("#p1_l").val();
+          				$.ajax({
+          					type: 'POST',
+          					data: JSON.stringify({'name' : n, 'password' : p }),
+          					contentType: 'application/json',
+          					url: 'http://localhost:3000/login',
+          					success: function(data) {
+              					console.log(JSON.stringify(data));
+              					JSON.stringify(data);                					
+      					        if(data.redirect != 'incorrect password')
+                          window.location = data.redirect;
+                        else{
+                          alert("incorrect password or username");
+                          $("#p1_l").val('');
+                          $("#uid_l").val(null);
+                        }
+                      }
+  					      });
+					    }      		
         					
-        	});
+        });
         	$("#Fl").click(function(){
-        		if($("#Fid_l").val().length==0 || $("#Fid_l").val()=="User Name"){
-					$("#FacultyName_l").css("color", "red");        			
-        			alert("Please fill the fields in red.");        			
-        			return false;
-        		}
-        		else{
-					$("#FacultyName_l").css("color", "black");        			
+        		var flag=0;
+            if($("#Fid_l").val().length==0){
+              $("#FacultyName_l").css("color", "red");             
+              flag++;
+            }
+            else{
+              $("#FacultyName_l").css("color", "black");              
+            }
+            if($("#F1_l").val().length==0){
+              $("#pF1_l").css("color", "red");
+              flag++;
+            }
+            else{
+              $("#pF1_l").css("color","black");
+            }
+            if(flag!=0){
+              alert("Please fill the fields in red.");              
+              return false;
+            }
+        		else{       			
         			alert("Submitted");
         			var n = $("#Fid_l").val();
         			var p = $("#F1_l").val();
-    				$.ajax({
-    					type: 'POST',
-    					data: JSON.stringify({'name' : n, 'password' : p }),
-    					contentType: 'application/json',
-    					url: 'http://localhost:3000/loginFaculty',
-    					success: function(data) {
-        					console.log(JSON.stringify(data));
-        					JSON.stringify(data);
-        					window.location = data.redirect;
+      				$.ajax({
+      					type: 'POST',
+      					data: JSON.stringify({'name' : n, 'password' : p }),
+      					contentType: 'application/json',
+      					url: 'http://localhost:3000/loginFaculty',
+      					success: function(data) {
+          					console.log(JSON.stringify(data));
+          					JSON.stringify(data);
+          					if(data.redirect != 'incorrect password')
+                          window.location = data.redirect;
+                    else{
+                      alert("incorrect password or username");
+                      $("#F1_l").val('');
+                      $("#Fid_l").val(null);
+                    }
+      					}
+					    });
+				  }     		
         					
-    					}
-					});
-				};	       		
-        					
-        	});
+        });
         	$("#SLl").click(function(){
-        		if($("#SLid_l").val().length==0 || $("#SLid_l").val()=="User Name"){
-					$("#StudentName_l").css("color", "red");        			
-        			alert("Please fill the fields in red.");        			
-        			return false;
-        		}
-        		else{
-					$("#FacultyName_l").css("color", "black");        			
-        			alert("Submitted");
-        			var n = $("#SLid_l").val();
-        			var p = $("#SL1_l").val();
-    				if(p=="student")
-    					window.location = "/successLoginS"
-				};	       		
+					var flag=0;
+            if($("#SLid_l").val().length==0){
+              $("#StudentName_l").css("color", "red");             
+              flag++;
+            }
+            else{
+              $("#StudentName_l").css("color", "black");              
+            }
+            if($("#SL1_l").val().length==0){
+              $("#pSL1_l").css("color", "red");
+              flag++;
+            }
+            else{
+              $("#pSL1_l").css("color","black");
+            }
+            if(flag!=0){
+              alert("Please fill the fields in red.");              
+              return false;
+            }   
+        		else{        			
+            			alert("Submitted");
+            			var n = $("#SLid_l").val();
+            			var p = $("#SL1_l").val();
+          				if(p=="student")
+          					window.location = "/successLoginS";
+    				}       		
         					
         	});
     	});
