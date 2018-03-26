@@ -12,6 +12,7 @@ var session     =   require('express-session');
 var url = require('url');
 var path = require('path');
 var fs = require('fs');
+var nodemailer = require('nodemailer');
 var app = express();
 
 app.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
@@ -56,25 +57,19 @@ app.post('/sign_up', function (req, res) {
 
 app.post('/name',function(req, res){
   var name=req.body.name;
-  var flag;
   console.log(req.body.name);
   var sql = 'SELECT * FROM user WHERE username = ?';
   con.query(sql, [name], function (err, result) {
     if (err) throw err;
     else if (result.length>0) {
      console.log('User name already taken!!!!');
-     console.log('dusara naam lee!!!!');
-     flag=1;
+     res.send({ name:'yes'})
     }
-    else {
-    	console.log('nahi hai');
-    	res.status(301).end();
+    else{
+     console.log('nahi hai');
+     res.send({ name:'no' });
     }
   });
-  if(flag == 1){
-     res.status(200).end();
-  }
-
 });
 
 app.post('/login', function (req, res) {
@@ -90,17 +85,24 @@ app.post('/login', function (req, res) {
 		//Execute the SQL statement, with the value array:
 		con.query(sql, [name], function (err, result) {
 			//if (err) throw err;
-				if(result[0].password==password){
-					console.log('Login Successful');			
-					person=1;	
-					//res.locals.username = name;
-					res.send({redirect:'/successLoginCM/'+name });
-					//res.redirect('/successLoginCM');
-				}
-				else{
+      console.log(result);
+      if(result==""){
+				console.log('Incorrect username');
+        res.send({redirect:'incorrect password' });
+      }
+      else{
+        if(result[0].password==password){
+          console.log('Login Successful');      
+          person=1; 
+          //res.locals.username = name;
+          res.send({redirect:'/successLoginCM/'+name });
+          //res.redirect('/successLoginCM');
+        }
+        else{
           console.log('Incorrect password');
           res.send({redirect:'incorrect password' });
-			  }
+        }
+      }
       //con.end();
 		}); 
 	});
@@ -119,6 +121,11 @@ app.post('/loginFaculty', function (req, res) {
     //Execute the SQL statement, with the value array:
     con.query(sql, [name], function (err, result) {
       //if (err) throw err;
+      if(result==""){
+        console.log('Incorrect username');
+        res.send({redirect:'incorrect password' });
+      }
+      else{
         if(result[0].password==password && result[0].Emp_id != "00000"){
           console.log('Login Successful');      
           res.send({redirect:'/successLoginFC/'+name });
@@ -132,6 +139,7 @@ app.post('/loginFaculty', function (req, res) {
           console.log('Incorrect password');
           res.send({redirect:'incorrect password' });
         }
+      }
       //con.end();
     }); 
   });
@@ -173,9 +181,9 @@ app.get('/successLoginADSW/:name',function(req,res){
   var Ename = [];
   con.connect(function(err) {
       console.log("Connected!");
-      var sql = 'SELECT * FROM event WHERE E_Permission="Approve"';
+      var sql = 'SELECT * FROM event WHERE E_Permission="Approve" and ADSW_per IS NULL;';
       //Execute the SQL statement, with the value array:
-      con.query(sql, [f_name], function (err, result) {
+      con.query(sql, function (err, result) {
         //if (err) throw err;
         for(i=0;i<result.length;i++){
           var elem = new Object();
@@ -277,16 +285,53 @@ app.post('/Faculty',function(req,res){
   var p = req.body.Permission;
   var Event = req.body.Event_Name;
   var f_name = req.body.Faculty_Name;
+  var P;
   con.connect(function(err) {
       console.log("Connected!");
       var sql = 'UPDATE event SET E_Permission = ?,F_Message = ? WHERE Event_Name = ? and E_FCN = ?';
       //Execute the SQL statement, with the value array:
       con.query(sql, [p,f_message,Event,f_name], function (err, result) {
-        //if (err) throw err;
-        //var data = JSON.stringify(result);
+        con.query(sql, [p,Event], function (err, result) {
+          var sql1 = 'select * from event where Event_Name = ?';          
+          con.query(sql1, [Event], function(err, result){
+            var email_sc = result[0].E_SCEI;
+            console.log(email_sc);
+            
+            if(p == "Approve")
+              P = "Approved";
+            else
+              P = "Rejected";
+
+            var transporter = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                user: 'saurav.varshney02@gmail.com',
+                pass: '21011999'
+              }
+            });
+
+            var mailOptions = {
+              from: 'saurav.varshney02@gmail.com',
+              to: email_sc,
+              subject: 'Event\'s permission',
+              text: 'Faculty Coordinator: ' + result[0].E_FCN + ' ' + P + ' the Event: ' + Event + ' student coodinator: ' + result[0].E_SCN + '.'
+            };
+
+            transporter.sendMail(mailOptions, function(error, info){
+              if (error) {
+                console.log(error);
+              } 
+              else {
+                console.log('Email sent: ' + info.response);
+              }
+            });
+
+          });
+
         res.status(200).end();
       }); 
   });
+});
 });
 
 app.post('/ADSW',function(req,res){
@@ -297,8 +342,44 @@ app.post('/ADSW',function(req,res){
       var sql = 'UPDATE event SET ADSW_per = ? WHERE Event_Name = ?';
       //Execute the SQL statement, with the value array:
       con.query(sql, [p,Event], function (err, result) {
-        //if (err) throw err;
-        //var data = JSON.stringify(result);
+        
+        
+          var sql1 = 'select * from event where Event_Name = ?';
+          
+          con.query(sql1, [Event], function(err, result){
+            var email_sc = result[0].E_SCEI;
+            var email_fc = result[0].E_FCEI;
+            console.log(email_sc,email_fc);
+            if(p == "Approve")
+              var P = "Approved";
+            else
+              var P = "Rejected";
+
+            var transporter = nodemailer.createTransport({
+              service: 'gmail',
+              auth: {
+                user: 'saurav.varshney02@gmail.com',
+                pass: '21011999'
+              }
+            })
+
+            var mailOptions = {
+              from: 'saurav.varshney02@gmail.com',
+              to: email_sc + ', ' + email_fc,
+              subject: 'Event\'s permission',
+              text: 'ADSW ' + P + ' the Event: ' + Event + ' student coodinator: ' + result[0].E_SCN + '.'
+            }
+
+            transporter.sendMail(mailOptions, function(error, info){
+              if (error) {
+                console.log(error);
+              } else {
+                console.log('Email sent: ' + info.response);
+              }
+            })
+
+          });
+
         res.status(200).end();
       }); 
   });
@@ -308,10 +389,10 @@ app.post('/EventCalender',function(req,res){
   var d = new Date();
   var m = d.getMonth();
   var Event = [];
-  console.log(m);
+  console.log("month",m);
   con.connect(function(err){
     console.log("Connected!");
-    var sql = 'SELECT Event_Name,Event_Date FROM event  where ADSW_per = "Approve";';
+    var sql = 'SELECT Event_Name,Event_Date FROM event where ADSW_per = "Approve";';
     con.query(sql,function(err, result){
       console.log(result);
       if(result != []){
@@ -325,11 +406,11 @@ app.post('/EventCalender',function(req,res){
             var elem = new Object();
             elem["E_Name"] = result[i].Event_Name;
             elem["E_Date"] = result[i].Event_Date;
+            Event.push(elem);
           }
-          Event.push(elem);
         }
       }
-      console.log(Event);
+      console.log("Events", Event);
       var data = JSON.stringify(Event);
       console.log(data);
       res.status(200).end(data);

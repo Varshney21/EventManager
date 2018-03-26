@@ -53,7 +53,7 @@
 			#SL{
 				padding-top: 5px;			
 			}
-			.tooltiptext {
+			#iVE {
     			display: none;
     			width: 200px;
     			background-color: lightblue;
@@ -65,9 +65,9 @@
     			z-index: 1;
     			bottom: 150%;
     			left: 50%;
-    			margin-left: -60px;
+    			margin-left: -44px;
 			}
-			.tooltiptext::after {
+			#iVE::after {
     			content: "";
     			position: absolute;
     			top: 50%;
@@ -77,7 +77,54 @@
     			border-style: solid;
     			border-color: transparent lightblue transparent transparent;
 			}
-			
+			#uNA {
+          display: none;
+          width: 200px;
+          background-color: lightblue;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px;
+          position: relative;
+          z-index: 1;
+          bottom: 150%;
+          left: 50%;
+          margin-left: -60px;
+      }
+      #uNA::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          right: 100%;
+          margin-top: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent lightblue transparent transparent;
+      }
+      #pNM {
+          display: none;
+          width: 200px;
+          background-color: lightblue;
+          color: #fff;
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px;
+          position: relative;
+          z-index: 1;
+          bottom: 150%;
+          left: 50%;
+          margin-left: -57px;
+      }
+      #pNM::after {
+          content: "";
+          position: absolute;
+          top: 50%;
+          right: 100%;
+          margin-top: -5px;
+          border-width: 5px;
+          border-style: solid;
+          border-color: transparent lightblue transparent transparent;
+      }
 		</style>
 	</head>
 	<body>			
@@ -96,16 +143,18 @@
   				</tr>
   				<tr><td class="S_IN" id="UserName">UserName:</td>
   					 <td class="S_IN"><input type="text" name="userid_s" id="uid_s" size="15"></td>
+             <td class="S_IN" style="border-color: white;"><span class="tooltiptext" id="uNA">UserName Not available</span></td>
   				</tr>
   				<tr><td class="S_IN" id="pp1_s">Password:</td>
   				    <td class="S_IN"><input type="password" name="p1_s" id="p1_s" size="15" autocomplete="off"></td>
   				</tr>
   				<tr><td class="S_IN" id="pp2_s">Confirm Password:</td>
   					 <td class="S_IN"><input type="password" name="p2_s" id="p2_s" size="15" autocomplete="off"></td>
-  					 <td class="S_IN" style="border-color: white;"><span class="tooltiptext">Password not matching</span></td>
+  					 <td class="S_IN" style="border-color: white;"><span class="tooltiptext" id="pNM">Password not matching</span></td>
   				</tr>
   				<tr><td class="S_IN" id="ee1_s">Email:</td>
-  					 <td class="S_IN"><input type="email" name="e1_s" id="e1_s" size="15"></td>
+  					 <td class="S_IN"><input type="text" name="e1_s" id="e1_s" size="15"></td>
+             <td class="S_IN" style="border-color: white;"><span class="tooltiptext" id="iVE">Invalid Email-ID</span></td>
   				</tr>
   				<tr><td class="S_IN" colspan="2"><input type="submit" id="fsu" value="Submit"></td></tr> 
   				
@@ -141,7 +190,6 @@
 		$(document).ready(function () {
 		
 			$("#l1").click(function () {
-			
 				if(s==0){			
 					$(".list1").css("background-color","lightcyan");
 					$(".S_IN").show();
@@ -155,6 +203,7 @@
 					s=1;			
 				}
 			});
+
 			$("#l2").click(function () {
 				if(s==0){			
 					$(".list2").css("background-color","lightcyan");
@@ -170,26 +219,60 @@
 				}
 			});
 		
-			$("#uid1_s").change(function () {
+			$("#uid_s").change(function () {
 				var n=$(this).val();
 				console.log(n);
-				xhttp.open('POST', 'http://localhost:3000/name', true);					
-				xhttp.setRequestHeader("Content-Type", "application/json");
-				xhttp.send(JSON.stringify({'name' : n}));	
-				xhttp.onreadystatechange = function() {
-			   	if (this.readyState == 4 && this.status == 200) {
-						console.log("message_aaya_aaya_aaya");				   	
-  					}
-				};				
+        $.ajax({
+          type: 'POST',
+          data: JSON.stringify({'name' : n}),
+          contentType: 'application/json',
+          url: 'http://localhost:3000/name',
+          success: function(data) {
+              //JSON.stringify(data);
+              console.log(data.name);
+              if(data.name=="yes")
+                $("#uNA").show();
+              else 
+                $("#uNA").hide();
+          }
+        });
 			});
+
+      $("#p2_s").keyup(function () {
+        var p=$(this).val();
+        var p1=$("#p1_s").val();
+        if(p!=p1)
+        $("#pNM").show();
+        else 
+        $("#pNM").hide();
+      });
+
+      $("#p1_s").change(function () {
+        var p=$(this).val();
+        if(!(/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])/.test(p) && p.length>=8)){
+          $("#pIC").show();
+          alert("Password should contain atleast one small letter, capital letter, numbers and special charecter and length >=8")
+        }
+        else{
+        }
+      });
+      
+      $("#e1_s").keyup(function () {
+        var e=$(this).val();
+        if(!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(e)))
+          $("#iVE").show();
+        else 
+          $("#iVE").hide();
+      });
+
 			$("#l3").click(function () {
 				$(".list1").hide();
 				$(".list2").hide();
 				$(".L_IN").hide();
 				$(".list3").show();
 				$(".F_IN").show();
-				
 			});
+
 			$("#l4").click(function () {
 				$(".list1").hide();
 				$(".list2").hide();
@@ -197,14 +280,6 @@
 				$(".list4").show();
 				$(".SL_IN").show();
 				
-			});
-			$("#p2_s").keyup(function () {
-				var p=$(this).val();
-				var p1=$("#p1_s").val();
-				if(p!=p1)
-				$(".tooltiptext").show();
-				else 
-				$(".tooltiptext").hide();
 			});
 			
 			$("#fsu").click(function(){
